@@ -115,6 +115,7 @@ def enough_money_inserted(money_available: float, command: str) -> bool:
     :return:
     """
     if money_available < MENU[command]["cost"]:
+        print("Sorry that's not enough money. Money refunded.")
         return False
     return True
 
@@ -132,7 +133,7 @@ def make_coffee(coffee_type: str, current_resources: dict):
     for resource in MENU[coffee_type]["ingredients"]:
         current_resources[resource][0] -= MENU[coffee_type]["ingredients"][resource]
     current_resources["money"][0] += MENU[coffee_type]["cost"]
-    print(f"Here is your {coffee_type}. Enjoy!")
+    print(f"Here is your {coffee_type} ☕. Enjoy!")
 
 
 if __name__ == "__main__":
@@ -152,5 +153,4 @@ if __name__ == "__main__":
                     change = round(inserted_money - MENU[user_input]["cost"], 2)
                     print(f"Here is ${change} dollars in change.")
                 make_coffee(coffee_type=user_input, current_resources=resources)
-            else:
-                print("Sorry that's not enough money. Money refunded.")
+
